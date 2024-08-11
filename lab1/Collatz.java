@@ -3,14 +3,16 @@
  */
 public class Collatz {
 
-    /** Buggy implementation of nextNumber! */
+    /** Return next number of Collatz number. For even number, return n / 2;
+     * for odd number, return 3n + 1 */
+
     public static int nextNumber(int n) {
-        if (n  == 128) {
+        if (n  == 1) {
             return 1;
-        } else if (n == 5) {
-            return 3 * n + 1;
+        } else if (n % 2 == 0) {
+            return n / 2;
         } else {
-            return n * 2;
+            return n * 3 + 1;
         }
     }
 
