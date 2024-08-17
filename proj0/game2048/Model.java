@@ -113,6 +113,45 @@ public class Model extends Observable {
         // TODO: Modify this.board (and perhaps this.score) to account
         // for the tilt to the Side SIDE. If the board changed, set the
         // changed local variable to true.
+        // Try case North only first
+        // 1. Iteratively move the tile.
+        //      Find the first pos that is not empty in the direction.
+        //      if value are the same, replace it
+        //      else move next to it
+        // 2. Count the score.
+        int size = board.size();
+        for(int col=0; col < size; col++)
+        {
+            for(int row = size - 2; row >= 0; row--)
+            {
+                Tile t = board.tile(col, row);
+                if (t == null)
+                    continue;
+                int target_row = row + 1;
+                if(target_row < size - 1 &&
+                   board.tile(col, target_row) == null)
+                {
+                    target_row++;
+                }
+                Tile target_tile = board.tile(col, target_row);
+                if (target_tile != null)
+                {
+                    if (target_tile.value() != t.value())
+                    {
+                        target_row--;
+                    }
+                    else
+                    {
+                        this.score += 2 * t.value();
+                    }
+                }
+                board.move(col, target_row, t);
+                changed = true;
+            }
+
+        }
+
+
 
         checkGameOver();
         if (changed) {
