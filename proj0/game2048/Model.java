@@ -109,6 +109,7 @@ public class Model extends Observable {
     public boolean tilt(Side side) {
         boolean changed;
         changed = false;
+        board.setViewingPerspective(side);
 
         // TODO: Modify this.board (and perhaps this.score) to account
         // for the tilt to the Side SIDE. If the board changed, set the
@@ -116,42 +117,16 @@ public class Model extends Observable {
         // Try case North only first
         // 1. Iteratively move the tile.
         //      Find the first pos that is not empty in the direction.
-        //      if value are the same, replace it
+        //      if value are the same, replace it and add score.
         //      else move next to it
-        // 2. Count the score.
         int size = board.size();
         for(int col=0; col < size; col++)
         {
-            for(int row = size - 2; row >= 0; row--)
-            {
-                Tile t = board.tile(col, row);
-                if (t == null)
-                    continue;
-                int target_row = row + 1;
-                if(target_row < size - 1 &&
-                   board.tile(col, target_row) == null)
-                {
-                    target_row++;
-                }
-                Tile target_tile = board.tile(col, target_row);
-                if (target_tile != null)
-                {
-                    if (target_tile.value() != t.value())
-                    {
-                        target_row--;
-                    }
-                    else
-                    {
-                        this.score += 2 * t.value();
-                    }
-                }
-                board.move(col, target_row, t);
+            if(tilt_one_column(col, size))
                 changed = true;
-            }
-
         }
 
-
+        board.setViewingPerspective(Side.NORTH);
 
         checkGameOver();
         if (changed) {
@@ -159,6 +134,44 @@ public class Model extends Observable {
         }
         return changed;
     }
+
+    private boolean tilt_one_column(int col, int size) {
+        boolean changed = false;
+        boolean[] has_merged = new boolean[size];
+        for (int r=0; r < size; r++)
+            has_merged[r] = false;
+        for(int row = size - 2; row >= 0; row--)
+        {
+            Tile t = board.tile(col, row);
+            if (t == null)
+                continue;
+            int target_row = row + 1;
+            while(target_row < size - 1 &&
+                    board.tile(col, target_row) == null) //Find first non-null position ahead.
+            {
+                target_row++;
+            }
+            Tile target_tile = board.tile(col, target_row);
+            if (target_tile != null)
+            {
+                if (has_merged[target_row] ||
+                        target_tile.value() != t.value())
+                {
+                    target_row--;
+                }
+                else
+                {
+                    has_merged[target_row] = true;
+                    this.score += 2 * t.value();
+                }
+            }
+            board.move(col, target_row, t);
+            changed = true;
+
+        }
+        return changed;
+    }
+
 
     /** Checks if the game is over and sets the gameOver variable
      *  appropriately.
