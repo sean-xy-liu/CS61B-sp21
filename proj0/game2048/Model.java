@@ -138,6 +138,14 @@ public class Model extends Observable {
      * */
     public static boolean emptySpaceExists(Board b) {
         // TODO: Fill in this function.
+        for(int col = 0; col < b.size(); col++)
+        {
+            for(int row = 0; row < b.size(); row++)
+            {
+                if(b.tile(col, row) == null)
+                    return true;
+            }
+        }
         return false;
     }
 
@@ -148,6 +156,15 @@ public class Model extends Observable {
      */
     public static boolean maxTileExists(Board b) {
         // TODO: Fill in this function.
+        for(int col = 0; col < b.size(); col++)
+        {
+            for(int row = 0; row < b.size(); row++)
+            {
+                if(b.tile(col, row) != null &&
+                   b.tile(col, row).value() == MAX_PIECE)
+                    return true;
+            }
+        }
         return false;
     }
 
@@ -159,8 +176,41 @@ public class Model extends Observable {
      */
     public static boolean atLeastOneMoveExists(Board b) {
         // TODO: Fill in this function.
+        return emptySpaceExists(b) ||
+               equalValueAdjacentTilesExists(b);
+    }
+    private static boolean equalValueAdjacentTilesExists(Board b)
+    {
+        return equalValueColumnAdjacentTilesExists(b) ||
+               equalValueColumnRowAdjacentTilesExists(b);
+    }
+
+    private static boolean equalValueColumnRowAdjacentTilesExists(Board b) {
+        for(int row=0; row < b.size(); row++) {
+            for (int col = 0; col < b.size() - 1; col++) {
+                int value = b.tile(col, row).value();
+                int next_value = b.tile(col + 1, row).value();
+                if (value == next_value)
+                    return true;
+            }
+        }
         return false;
     }
+
+    private static boolean equalValueColumnAdjacentTilesExists(Board b) {
+        for(int col=0; col < b.size(); col++)
+        {
+            for (int row=0; row < b.size() - 1; row++)
+            {
+                int value = b.tile(col, row).value();
+                int next_value = b.tile(col, row + 1).value();
+                if (value == next_value)
+                    return true;
+            }
+        }
+        return false;
+    }
+
 
 
     @Override
