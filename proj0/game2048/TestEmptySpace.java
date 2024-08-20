@@ -13,6 +13,7 @@ public class TestEmptySpace {
     /** The Board that we'll be testing on. */
     static Board b;
 
+
     @Test
     /** Note that this isn't a possible board state. */
     public void testCompletelyEmpty() {
