@@ -28,7 +28,7 @@ public class AddConstantTest {
     @Test
     public void testAddToSmallList(){
         IntList lst = IntList.of(0);
-        IntListExercises.addConstant(lst, 0);
-        assertEquals("0", lst.toString());
+        IntListExercises.addConstant(lst, 4);
+        assertEquals("4", lst.toString());
     }
 }
