@@ -18,7 +18,7 @@ public class LinkedListDequeTest {
             lls.addLast("world");
         }
         String expect = "Anchor";
-        String actual = lls.get(100);
+        String actual = lls.getRecursive(100);
         assertEquals(expect, actual);
     }
     @Test

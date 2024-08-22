@@ -211,6 +211,16 @@ public class LinkedListDeque<T> {
     }
     return p.item;
   }
+  public T getRecursive(int index){
+    if (index >= size)
+      return null;
+    return getRecursiveHelper(index, first);
+  }
+  private T getRecursiveHelper(int index, Node p){
+    if (index == 0)
+      return p.item;
+    return getRecursiveHelper(index - 1, p.next);
+  }
 
 
 
