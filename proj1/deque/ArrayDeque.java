@@ -2,10 +2,10 @@ package deque;
 public class ArrayDeque<T> {
   public static void main(String[] args) {
     ArrayDeque<String> al = new ArrayDeque<String>();
-    for (int i=0 ; i < 2; i++){
+    for (int i=0 ; i < 2000; i++){
       al.addLast("JoJo");
     }
-    for (int i=0 ; i < 20000; i++){
+    for (int i=0 ; i < 2000; i++){
       al.addLast("Get Back");
     }
     al.show();
@@ -38,8 +38,7 @@ public class ArrayDeque<T> {
   public ArrayDeque() {
     items =  (T[]) new Object[initialItemLength];
     size = 0;
-    firstIndex = initialFistIndex;
-    updateLastIndex();
+    updateInnerIndex(initialFistIndex);
   }
   private int getInnerIndex(int index){
     return (index + firstIndex) % items.length;
@@ -58,22 +57,26 @@ public class ArrayDeque<T> {
     return items.length;
   }
   public boolean resize(int length){
-    if (length <= size()){
+    if (length == length() &&
+        length <= size()) {
       return false;
     }
+    int newFirstIndex = 0;
     T[] newItems = (T[]) new Object[length];
-    if (!hasCirculated())
-      System.arraycopy(items, firstIndex, newItems, firstIndex, size());
-    else{
+    if (hasCirculated()) {
       int size1 = length() - firstIndex;
       int size2 = size() - size1;
-      System.arraycopy(items, firstIndex, newItems, firstIndex, size1);
-      System.arraycopy(items, 0, newItems, length(), size2);
+      System.arraycopy(items, firstIndex, newItems, newFirstIndex, size1);
+      System.arraycopy(items, 0, newItems, newFirstIndex + size1, size2);
+    }
+    else {
+      System.arraycopy(items, firstIndex, newItems, newFirstIndex, size());
     }
     items = newItems;
-    updateLastIndex();
+    updateInnerIndex(newFirstIndex);
     return true;
   }
+
   private boolean hasCirculated(){
     return firstIndex > lastIndex;
   }
@@ -88,6 +91,13 @@ public class ArrayDeque<T> {
              items.length > initialItemLength){
       resize(items.length / 2);
     }
+  }
+  private void updateInnerIndex(int firstIndex){
+    updateFirstIndex(firstIndex);
+    updateLastIndex();
+  }
+  private void updateFirstIndex(int index){
+    firstIndex = index;
   }
   private void updateLastIndex(){
     if (isEmpty())
