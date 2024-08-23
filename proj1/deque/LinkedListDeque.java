@@ -52,10 +52,10 @@ public class LinkedListDeque<T> {
   private Node last;
   private Node sentinel = new Node();
   private int size;
-  LinkedListDeque(T item){
+  public LinkedListDeque(T item){
     addToEmpty(item);
   }
-  LinkedListDeque(){
+  public LinkedListDeque(){
     size = 0;
   }
   /**
