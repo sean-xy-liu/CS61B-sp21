@@ -9,57 +9,18 @@ import static org.junit.Assert.*;
 public class ArrayDequeTest {
 
     @Test
-    public void initTest(){
+    public void initTest() {
         ArrayDeque<String> ad = new ArrayDeque<>();
-        for (int i=0; i < 2000; i++){
+        for (int i = 0; i < 2000; i++) {
             ad.addFirst("Get Back.");
         }
-        for (int i=0; i < 2000; i++){
+        for (int i = 0; i < 2000; i++){
             ad.addLast("Let it be");
         }
-        ad.show();
-        ad.clear();
-        ad.show();
         ad.addLast("Once there was a way,");
-        ad.show();
     }
 
-    @Test
-    public void addTest(){
-        ArrayDeque<String> ad = new ArrayDeque<>();
-        ad.addFirst("JoJo");
-        ad.addLast("Go home!");
-        String expect = "JoJo";
-        String actual = ad.getFirst();
-        assertEquals(expect, actual);
-        expect = "Go home!";
-        actual = ad.getLast();
-        assertEquals(expect, actual);
-    }
 
-    @Test
-    public void removeTest(){
-        ArrayDeque<String> ad = new ArrayDeque<>();
-        ad.addFirst("JoJo");
-        ad.addLast("Go home!");
-        ad.addLast("Your mom is waiting for you.");
-        String expect = "Your mom is waiting for you.";
-        String actual = ad.getLast();
-        assertEquals(expect, actual);
-        expect = "JoJo";
-        actual = ad.getFirst();
-        assertEquals(expect, actual);
-        int expectInt = 3;
-        int actualInt = ad.size();
-        assertEquals(expectInt, actualInt);
-        assertEquals(expect, ad.removeFirst());
-        expect = ad.getLast();
-        assertEquals(expect, ad.removeLast());
-        ad.printDeque();
-        expectInt = 1;
-        actualInt = ad.size();
-        assertEquals(expectInt, actualInt);
-    }
 
     @Test
     /** Adds a few things to the list, checking isEmpty() and size() are correct,
@@ -122,6 +83,26 @@ public class ArrayDequeTest {
         errorMsg += "  actual size() returned 0\n";
 
         assertEquals(errorMsg, 0, size);
+    }
+    @Test
+    public void equalTest() {
+        ArrayDeque<String> lldStr = new ArrayDeque<>();
+        lldStr.addLast("Get Back");
+        lldStr.addLast("Let it be.");
+        lldStr.addLast("JoJo was a woman");
+        ArrayDeque<String> lldStr1 = new ArrayDeque<>();
+        lldStr1.addLast("Get Back");
+        lldStr1.addLast("Let it be.");
+        lldStr1.addLast("JoJo was a woman");
+        boolean expect = true;
+        boolean actual = lldStr1.equals(lldStr);
+        assertEquals(expect, actual);
+        actual = lldStr1.equals(lldStr1);
+        assertEquals(expect, actual);
+        lldStr.addLast("JoJo was a woman");
+        actual = lldStr1.equals(lldStr);
+        expect = false;
+        assertEquals(expect, actual);
     }
     @Test
     /* check if null is return when removing from an empty LinkedListDeque. */

@@ -9,16 +9,23 @@ import static org.junit.Assert.*;
 public class LinkedListDequeTest {
 
     @Test
-    public void getTest(){
-        LinkedListDeque<String> lls = new LinkedListDeque<>("Anchor");
-        for (int i=0; i < 100; i++){
-            lls.addFirst("hello");
-        }
-        for (int i=0; i < 99; i++){
-            lls.addLast("world");
-        }
-        String expect = "Anchor";
-        String actual = lls.getRecursive(100);
+    public void equalTest() {
+        LinkedListDeque<String> lldStr = new LinkedListDeque<>();
+        lldStr.addLast("Get Back");
+        lldStr.addLast("Let it be.");
+        lldStr.addLast("JoJo was a woman");
+        LinkedListDeque<String> lldStr1 = new LinkedListDeque<>();
+        lldStr1.addLast("Get Back");
+        lldStr1.addLast("Let it be.");
+        lldStr1.addLast("JoJo was a woman");
+        boolean expect = true;
+        boolean actual = lldStr1.equals(lldStr);
+        assertEquals(expect, actual);
+        actual = lldStr1.equals(lldStr1);
+        assertEquals(expect, actual);
+        lldStr.addLast("JoJo was a woman");
+        actual = lldStr1.equals(lldStr);
+        expect = false;
         assertEquals(expect, actual);
     }
     @Test

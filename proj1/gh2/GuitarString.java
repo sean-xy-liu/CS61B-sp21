@@ -22,7 +22,7 @@ public class GuitarString {
         //       Your should initially fill your buffer array with zeros.
         buffer = new ArrayDeque<>();
         int capacity = (int) Math.round(SR / frequency);
-        for (int i = 0; i < capacity; i++){
+        for (int i = 0; i < capacity; i++) {
             buffer.addLast(0.0);
         }
     }
