@@ -23,9 +23,18 @@ public class LinkedListDequeTest {
         assertEquals(expect, actual);
         actual = lldStr1.equals(lldStr1);
         assertEquals(expect, actual);
-        lldStr.addLast("JoJo was a woman");
+        lldStr1.addLast("JoJo was a woman");
         actual = lldStr1.equals(lldStr);
         expect = false;
+        assertEquals(expect, actual);
+        ArrayDeque<String> ads = new ArrayDeque<>();
+        ads.addLast("Get Back");
+        ads.addLast("Let it be.");
+        ads.addLast("JoJo was a woman");
+        expect = true;
+        actual = ads.equals(lldStr);
+        assertEquals(expect, actual);
+        actual = lldStr.equals(ads);
         assertEquals(expect, actual);
     }
     @Test

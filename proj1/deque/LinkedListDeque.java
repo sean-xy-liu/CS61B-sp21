@@ -41,7 +41,8 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
         }
 
         /**
-         * Bridge 2 nodes, front node's next point to current node, current node's next point to back node.
+         * Bridge 2 nodes, front node's next point to current node,
+         * current node's next point to back node.
          * So is the the prev pointer.
          * If front and back are the same, forms a circular list with the node.
          * @param front
@@ -229,10 +230,10 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
         if (this == o) {
             return true;
         }
-        if (o.getClass() != this.getClass()) {
+        if (!(o instanceof Deque)) {
             return false;
         }
-        LinkedListDeque<T> other = (LinkedListDeque<T>) o;
+        Deque<T> other = (Deque<T>) o;
         if (other.size() != this.size()) {
             return false;
         }
