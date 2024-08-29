@@ -1,6 +1,6 @@
 package deque;
 
-public class LinkedListDeque<T> {
+public class LinkedListDeque<T> implements Deque<T> {
   private class Node{
     T item;
     Node next;
@@ -83,13 +83,19 @@ public class LinkedListDeque<T> {
     lls.addFirst("hello");
     lls.addFirst("hi");
     lls.addLast("halo");
-    lls.printDeque();
+    lls.removeFirst();
+    lls.removeFirst();
+    lls.removeFirst();
+    boolean shouldPrint = lls.isEmpty();
+    if (shouldPrint)
+      System.out.println("It is a empty deque!");
   }
 
   /**
    * Adds an item of type T to the front of the deque.
    * @param item
    */
+  @Override
   public void addFirst(T item){
     if (isEmpty())
       addToEmpty(item);
@@ -109,6 +115,7 @@ public class LinkedListDeque<T> {
    *  Adds an item of type T to the back of the deque.
    * @param item
    */
+  @Override
   public void addLast(T item){
     if (isEmpty())
       addToEmpty(item);
@@ -120,16 +127,11 @@ public class LinkedListDeque<T> {
     }
   }
 
-  /**
-   * @return true if deque is empty, false otherwise.
-   */
-  public boolean isEmpty(){
-    return size == 0;
-  }
 
   /**
    * @return the number of items in the deque.
    */
+  @Override
   public int size(){
     return this.size;
   }
@@ -138,6 +140,7 @@ public class LinkedListDeque<T> {
    * Prints the items in the deque from first to last, separated by a space.
    * Once all the items have been printed, print out a new line.
    */
+  @Override
   public void printDeque(){
     Node p = first;
     for (int i=0; i < size; i++){
@@ -151,6 +154,7 @@ public class LinkedListDeque<T> {
    * If no such item exists, returns null.
    * @return the item at the front of the deque
    */
+  @Override
   public T removeFirst(){
     if (isEmpty())
       return null;
@@ -184,6 +188,7 @@ public class LinkedListDeque<T> {
    * If no such item exists, returns null.
    * @return the item at the front of the deque
    */
+  @Override
   public T removeLast(){
     if (size <= 1)
       return removeFirst();
@@ -200,6 +205,7 @@ public class LinkedListDeque<T> {
    * @param index
    * @return
    */
+  @Override
   public T get(int index){
     if (index >= size){
       return null;

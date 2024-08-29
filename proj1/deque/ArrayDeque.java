@@ -1,5 +1,5 @@
 package deque;
-public class ArrayDeque<T> {
+public class ArrayDeque<T> implements Deque<T> {
   public static void main(String[] args) {
     ArrayDeque<String> al = new ArrayDeque<String>();
     for (int i=0 ; i < 2000; i++){
@@ -105,6 +105,7 @@ public class ArrayDeque<T> {
     else
       lastIndex = getInnerIndex(size() - 1);
   }
+  @Override
   public void printDeque(){
     for (int i = 0; i < size; i++){
       System.out.println(get(i));
@@ -113,6 +114,7 @@ public class ArrayDeque<T> {
   }
 
   /** Inserts X into the back of the list. */
+  @Override
   public void addLast(T str) {
     if (isEmpty())
       addToEmpty(str);
@@ -123,6 +125,7 @@ public class ArrayDeque<T> {
       resize();
     }
   }
+  @Override
   public void addFirst(T str) {
     if (isEmpty())
       addToEmpty(str);
@@ -145,10 +148,8 @@ public class ArrayDeque<T> {
       return null;
     return items[firstIndex];
   }
-  public boolean isEmpty(){
-    return size == 0;
-  }
   /** Gets the ith item in the list (0 is the front). */
+  @Override
   public T get(int i) {
     if (i >= size)
       return null;
@@ -156,12 +157,14 @@ public class ArrayDeque<T> {
   }
 
   /** Returns the number of items in the list. */
+  @Override
   public int size() {
     return size;
   }
 
   /** Deletes item from back of the list and
    * returns deleted item. */
+  @Override
   public T removeLast() {
     if (isEmpty())
       return null;
@@ -174,6 +177,7 @@ public class ArrayDeque<T> {
     resize();
     return lastItem;
   }
+  @Override
   public T removeFirst() {
     if (isEmpty())
       return null;
