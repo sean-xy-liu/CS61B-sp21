@@ -75,35 +75,47 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V>{
 
     @Override
     public void put(K key, V value) {
-        if (root == null) {
-            root = new BSTNode(key, value);
-            size++;
-        }
-        BSTNode p = get(key, root);
-        if (p != null) {
-            p.value = value;
-        } else {
-            put(key, value, root);
-        }
+//        if (root == null) {
+//            root = new BSTNode(key, value);
+//            size++;
+//        }
+//        BSTNode p = get(key, root);
+//        if (p != null) {
+//            p.value = value;
+//        } else {
+//            put(key, value, root);
+//        }
+        root = put(key, value, root);
     }
-    // node shouldn't be null and the map doesn't contain this key
-    private void put(K key, V value, BSTNode node) {
-        int compareResult = key.compareTo(node.key);
-        if (compareResult > 0) {
-            if (node.right == null) {
-                node.setRight(new BSTNode(key, value));
-                size++;
-            } else {
-                put(key, value, node.right);
-            }
-        } else {
-            if (node.left == null) {
-                node.setLeft(new BSTNode(key, value));
-                size++;
-            } else {
-                put(key, value, node.left);
-            }
+    private BSTNode put(K key, V value, BSTNode node) {
+        if (node == null) {
+            size++;
+            return new BSTNode(key, value);
         }
+        if (key.compareTo(node.key) == 0) {
+            return new BSTNode(key, value);
+        } else if (key.compareTo(node.key) < 0) {
+            node.left = put(key, value, node.left);
+        } else if (key.compareTo(node.key) > 0) {
+            node.right = put(key, value, node.right);
+        }
+        return node;
+//        int compareResult = key.compareTo(node.key);
+//        if (compareResult > 0) {
+//            if (node.right == null) {
+//                node.setRight(new BSTNode(key, value));
+//                size++;
+//            } else {
+//                put(key, value, node.right);
+//            }
+//        } else {
+//            if (node.left == null) {
+//                node.setLeft(new BSTNode(key, value));
+//                size++;
+//            } else {
+//                put(key, value, node.left);
+//            }
+//        }
     }
 
     @Override
