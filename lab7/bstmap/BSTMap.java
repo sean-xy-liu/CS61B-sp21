@@ -5,8 +5,8 @@ import java.util.Set;
 
 // K have compareTo method.
 public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V>{
-    BSTNode root;
-    int size;
+    private BSTNode root;
+    private int size;
     private class BSTNode {
        K key;
        V value;
