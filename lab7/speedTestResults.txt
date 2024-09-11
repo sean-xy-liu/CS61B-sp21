@@ -1,0 +1,14 @@
+Enter # strings to insert into the maps: "JoJo"
+Please enter a positive integer: 20000
+class bstmap.ULLMap: 1.70 sec
+--Stack Overflow -- couldn't add 20000 strings.
+Java's Built-in TreeMap: 0.03 sec
+Java's Built-in HashMap: 0.00 sec
+
+Enter # strings to insert into the maps: "Get Back"
+Please enter a positive integer: Please enter a positive integer: 5000
+class bstmap.ULLMap: 0.08 sec
+class bstmap.BSTMap: 0.17 sec
+Java's Built-in TreeMap: 0.00 sec
+Java's Built-in HashMap: 0.00 sec
+
