@@ -68,6 +68,13 @@ public class TestMyHashMap {
         assertNotEquals(null, b.get("starChild"));
     }
 
+    @Test
+    public void myGetTest() {
+        MyHashMap<String, Integer> b = new MyHashMap<>();
+        b.put("starChild", 5);
+        assert b.containsKey("starChild");
+
+    }
     // assumes put works
     @Test
     public void sanitySizeTest() {
@@ -131,6 +138,7 @@ public class TestMyHashMap {
         // putting with existing key updates the value
         dictionary.put("hello", "kevin");
         assertEquals(1, dictionary.size());
+        String result = dictionary.get("hello");
         assertEquals("kevin", dictionary.get("hello"));
 
         // putting key in multiple times does not affect behavior

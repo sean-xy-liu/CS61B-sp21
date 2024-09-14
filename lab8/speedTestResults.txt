@@ -1,0 +1,7 @@
+Enter # strings to insert into each map: jojo
+Please enter a positive integer: 1000000
+class hashmap.MyHashMapALBuckets: 1.45 sec
+class hashmap.MyHashMapLLBuckets: 1.41 sec
+class hashmap.MyHashMapTSBuckets: 2.40 sec
+class hashmap.MyHashMapHSBuckets: 2.54 sec
+class hashmap.MyHashMapPQBuckets: 1.99 sec
